@@ -4,45 +4,43 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.API.Data;
+using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DatingApp.API.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
     {
         private readonly DataContext _context;
-        public ValuesController(DataContext context)
+        public UsersController(DataContext context)
         {
             _context = context;
 
         }
-        // GET api/values
+        // GET api/users
         [HttpGet]
-        public async Task<IActionResult> GetValues()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var values = await _context.Values.ToListAsync();
-            return Ok(values);
+             return await _context.Users.ToListAsync();
         }
 
-        // GET api/values/5
+        // GET api/users/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetValueById(int id)
+        public async Task<ActionResult<User>> GetUserById(int id)
         {
-            var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(value);
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        // POST api/values
+        // POST api/users
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/users/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
