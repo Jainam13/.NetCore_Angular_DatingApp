@@ -4,6 +4,7 @@ using DatingApp.API.RepositoryInterface;
 using DatingApp.API.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace DatingApp.API.Repository
 {
@@ -32,7 +33,7 @@ namespace DatingApp.API.Repository
 
         private bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hash = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            using (var hash = new HMACSHA512(passwordSalt))
             {
                 var computedHash = hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++) {
@@ -58,7 +59,7 @@ namespace DatingApp.API.Repository
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using (var hash = new System.Security.Cryptography.HMACSHA512())
+            using (var hash = new HMACSHA512())
             {
                 passwordSalt = hash.Key;
                 passwordHash = hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));

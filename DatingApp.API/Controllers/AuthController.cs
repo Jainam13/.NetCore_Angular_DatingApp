@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using DatingApp.API.Interface;
 
 namespace DatingApp.API.Controllers
 {
@@ -17,15 +18,16 @@ namespace DatingApp.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepo;
-        private readonly IConfiguration _config;
-        public AuthController(IAuthRepository authRepo, IConfiguration config)
+        private readonly ITokenService _tokenservice;
+
+        public AuthController(IAuthRepository authRepo, ITokenService tokenService)
         {
-            _config = config;
             _authRepo = authRepo;
+            _tokenservice = tokenService;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userRegisterDto)
+        public async Task<ActionResult<UserDto>> Register(UserForRegisterDto userRegisterDto)
         {
             userRegisterDto.Username = userRegisterDto.Username.ToLower();
 
@@ -41,41 +43,28 @@ namespace DatingApp.API.Controllers
 
             var userCreated = await _authRepo.Register(newUser, userRegisterDto.Password);
 
-            return StatusCode(201);
+            return new UserDto
+            {
+                Username = userCreated.UserName,
+                Token = _tokenservice.CreateToken(userCreated)
+            };
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> login(UserForLoginDto userForLoginDto)
+        public async Task<ActionResult<UserDto>> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _authRepo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid User");
             }
 
-            var claims = new[] {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.UserName)
+            return new UserDto
+            {
+                Username = userFromRepo.UserName,
+                Token = _tokenservice.CreateToken(userFromRepo)
             };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
-
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = credentials
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return Ok(new {
-                token = tokenHandler.WriteToken(token)
-            });
         }
     }
 }

@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthService } from './services/auth.service'
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [				
@@ -22,7 +23,8 @@ import { RegisterComponent } from './register/register.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService
