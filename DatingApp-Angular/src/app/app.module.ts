@@ -3,8 +3,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ToastrModule } from 'ngx-toastr';
+
+import { SharedModule } from './modules/shared.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -32,10 +32,7 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot(),
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
-    })
+    SharedModule
   ],
   providers: [
     AuthService,
