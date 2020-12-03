@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,9 +11,9 @@ import { AuthService } from '../services/auth.service';
 export class NavbarComponent implements OnInit {
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   login() {
@@ -22,14 +24,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
-  }
-
   logout() {
-    localStorage.removeItem('token');
-    console.log('Logged out');
+    this.authService.logout();
   }
 
 }

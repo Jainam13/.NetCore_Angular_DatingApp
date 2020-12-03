@@ -14,11 +14,11 @@ export class HomeComponent implements OnInit {
   }
 
   changeRegisterMode() {
-    this.registerMode = true;
+    this.registerMode = !this.registerMode;
   }
 
-  cancelRegister(registerMode: any) {
-    this.registerMode = registerMode;
+  cancelRegister(event: boolean) {
+    this.registerMode = event;
   }
 
 }
