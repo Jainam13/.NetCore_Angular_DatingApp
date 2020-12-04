@@ -19,5 +19,7 @@
     <Folder Include="Interface\" />
     <Folder Include="Services\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Errors\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
 </Project>
