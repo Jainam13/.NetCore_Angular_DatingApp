@@ -1,5 +1,7 @@
 ﻿using System;
+using AutoMapper;
 using DatingApp.API.Data;
+using DatingApp.API.Helpers;
 using DatingApp.API.Interface;
 using DatingApp.API.Repository;
 using DatingApp.API.RepositoryInterface;
@@ -18,6 +20,8 @@ namespace DatingApp.API.Extensions
 
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             return services;
         }

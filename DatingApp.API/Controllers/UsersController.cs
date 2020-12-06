@@ -7,6 +7,9 @@ using DatingApp.API.Data;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using DatingApp.API.Interface;
+using DatingApp.API.Dtos;
+using AutoMapper;
 
 namespace DatingApp.API.Controllers
 {
@@ -15,42 +18,37 @@ namespace DatingApp.API.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly DataContext _context;
-        public UsersController(DataContext context)
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
+
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            _context = context;
+            _userRepository = userRepository;
+            _mapper = mapper;
 
         }
         // GET api/users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-             return await _context.Users.ToListAsync();
+            var users = await _userRepository.GetUsersAsync();
+            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
+            return Ok(usersToReturn);
         }
 
         // GET api/users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserById(int id)
-        {
-            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<User>> GetUserById(int id)
+        //{
+            //return await _userRepository.GetUsersByIdAsync(id);
+        //}
 
-        // POST api/users
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // POST api/users/reed
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDto>> GetUserByUsername(string username)
         {
-        }
-
-        // PUT api/users/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var user = await _userRepository.GetUsersByUsernameAsync(username);
+            return _mapper.Map<MemberDto>(user);
         }
     }
 }

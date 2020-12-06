@@ -1,17 +1,26 @@
 ﻿<Properties StartupConfiguration="{647476F4-9D5C-45A8-A17E-2461EA14DD9F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ExceptionController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Helpers/AutoMapperProfiles.cs">
     <Files>
-      <File FileName="Controllers/ExceptionController.cs" Line="9" Column="7" />
+      <File FileName="Controllers/UsersController.cs" Line="29" Column="10" />
+      <File FileName="Helpers/AutoMapperProfiles.cs" Line="17" Column="1" />
+      <File FileName="Models/Photo.cs" />
+      <File FileName="Models/User.cs" />
+      <File FileName="Dtos/PhotoDto.cs" />
+      <File FileName="Dtos/MemberDto.cs" />
+      <File FileName="Extensions/ApplicationServiceExtensions.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DatingApp.API" expanded="True">
             <Node name="DatingApp.API" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="ExceptionController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Dtos" expanded="True" />
+              <Node name="Extensions" expanded="True" />
+              <Node name="Helpers" expanded="True">
+                <Node name="AutoMapperProfiles.cs" selected="True" />
               </Node>
-              <Node name="Middleware" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>
