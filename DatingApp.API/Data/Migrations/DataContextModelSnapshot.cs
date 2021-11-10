@@ -3,16 +3,14 @@ using System;
 using DatingApp.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DatingApp.API.Migrations
+namespace DatingApp.API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201206032503_ExtensionAdditionalUserEntity")]
-    partial class ExtensionAdditionalUserEntity
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +22,6 @@ namespace DatingApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
@@ -36,9 +31,12 @@ namespace DatingApp.API.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Photos");
                 });
@@ -109,13 +107,13 @@ namespace DatingApp.API.Migrations
 
             modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
                 {
-                    b.HasOne("DatingApp.API.Models.User", "AppUser")
+                    b.HasOne("DatingApp.API.Models.User", "User")
                         .WithMany("Photos")
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DatingApp.API.Models.User", b =>

@@ -1,5 +1,4 @@
-﻿using System;
-using DatingApp.API.Data;
+﻿using DatingApp.API.Data;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

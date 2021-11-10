@@ -1,26 +1,24 @@
 ﻿<Properties StartupConfiguration="{647476F4-9D5C-45A8-A17E-2461EA14DD9F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Helpers/AutoMapperProfiles.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ExceptionController.cs">
     <Files>
-      <File FileName="Controllers/UsersController.cs" Line="29" Column="10" />
-      <File FileName="Helpers/AutoMapperProfiles.cs" Line="17" Column="1" />
-      <File FileName="Models/Photo.cs" />
-      <File FileName="Models/User.cs" />
-      <File FileName="Dtos/PhotoDto.cs" />
-      <File FileName="Dtos/MemberDto.cs" />
-      <File FileName="Extensions/ApplicationServiceExtensions.cs" />
+      <File FileName="Startup.cs" Line="47" Column="98" />
+      <File FileName="Controllers/AuthController.cs" Line="16" Column="18" />
+      <File FileName="Controllers/ExceptionController.cs" Line="38" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DatingApp.API" expanded="True">
             <Node name="DatingApp.API" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ExceptionController.cs" selected="True" />
+              </Node>
               <Node name="Dtos" expanded="True" />
               <Node name="Extensions" expanded="True" />
-              <Node name="Helpers" expanded="True">
-                <Node name="AutoMapperProfiles.cs" selected="True" />
-              </Node>
+              <Node name="Helpers" expanded="True" />
+              <Node name="Interface" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Repository" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -31,7 +29,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/jainampatel/Docs/WebApplication/ASP_Angular/DatingApp.API/Data/Seed.cs" relfile="Data/Seed.cs" line="20" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

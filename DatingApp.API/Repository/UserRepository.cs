@@ -19,7 +19,9 @@ namespace DatingApp.API.Interface
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Include(p => p.Photos)
+                .ToListAsync();
         }
 
         public async Task<User> GetUsersByIdAsync(int id)
@@ -29,7 +31,9 @@ namespace DatingApp.API.Interface
 
         public async Task<User> GetUsersByUsernameAsync(string username)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
+            return await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
         public async Task<bool> SaveAllAsync()
